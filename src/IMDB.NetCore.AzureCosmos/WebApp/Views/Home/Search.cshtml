@@ -1,0 +1,105 @@
+﻿@model WebApp.ViewModels.MovieSearch
+
+@{
+    ViewData["Title"] = "TheMovieDB Search";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="container">
+    <br />
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-md" asp-action="Search">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-search h4 text-body"></i>
+                    </div>
+                    <!--end of col-->
+                    <div class="col">
+                        <span asp-validation-for="query" class="text-danger"></span>
+                        <input asp-for="query" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search Movies">
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto">
+                        <button class="btn btn-lg btn-success" type="submit">Search</button>
+                    </div>
+                    <!--end of col-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+@if (Model.Results.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    Id
+                </th>
+                <th>
+                    OriginalTitle
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    ReleaseDate
+                </th>
+                <th>
+                    Import Movie
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Results)
+            {
+            <tr>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.PosterPath)*@
+                    <div class="image-movie-logo">
+                        <img src="@item.PosterPath" asp-append-version="true">
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginalTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Create", "Create", "Movie", new { Id = item.Id })
+                </td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            No Data availalble
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

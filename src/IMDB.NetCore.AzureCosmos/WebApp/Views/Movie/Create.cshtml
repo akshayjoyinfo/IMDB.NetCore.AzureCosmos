@@ -1,0 +1,288 @@
+﻿@model WebApp.ViewModels.MovieViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create">
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.OriginalTitle" class="control-label"></label>
+                        <input asp-for="MovieDetails.OriginalTitle" class="form-control" placeholder="Original Title" />
+                        <span asp-validation-for="MovieDetails.OriginalTitle" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.Title" class="control-label"></label>
+                        <input asp-for="MovieDetails.Title" class="form-control" />
+                        <span asp-validation-for="MovieDetails.Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.OriginalLanguage" class="control-label"></label>
+                        <input asp-for="MovieDetails.OriginalLanguage" class="form-control" />
+                        <span asp-validation-for="MovieDetails.OriginalLanguage" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.ImdbId" class="control-label"></label>
+                        <input asp-for="MovieDetails.ImdbId" class="form-control" />
+                        <span asp-validation-for="MovieDetails.ImdbId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.Overview" class="control-label"></label>
+                        <textarea asp-for="MovieDetails.Overview" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="MovieDetails.Overview" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.Tagline" class="control-label"></label>
+                        <textarea asp-for="MovieDetails.Tagline" class="form-control" rows="3"></textarea>
+                        <span asp-validation-for="MovieDetails.Tagline" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.ReleaseDate" class="control-label"></label>
+                        <input asp-for="MovieDetails.ReleaseDate" class="form-control" />
+                        <span asp-validation-for="MovieDetails.ReleaseDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <label asp-for="MovieDetails.Budget" class="control-label"></label>
+                        <input asp-for="MovieDetails.Budget" class="form-control" />
+                        <span asp-validation-for="MovieDetails.Budget" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <label asp-for="MovieDetails.Revenue" class="control-label"></label>
+                        <input asp-for="MovieDetails.Revenue" class="form-control" />
+                        <span asp-validation-for="MovieDetails.Revenue" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.PosterPath" class="control-label"></label>
+                        <input asp-for="MovieDetails.PosterPath" class="form-control" />
+                        <span asp-validation-for="MovieDetails.PosterPath" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <label asp-for="MovieDetails.Popularity" class="control-label"></label>
+                        <input asp-for="MovieDetails.Popularity" class="form-control" />
+                        <span asp-validation-for="MovieDetails.Popularity" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3">
+                        <label asp-for="MovieDetails.Status" class="control-label"></label>
+                        <input asp-for="MovieDetails.Status" class="form-control" />
+                        <span asp-validation-for="MovieDetails.Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.Genres" class="control-label"></label>
+                        <div class="item-content-block tags">
+                            @for (int i = 0; i < Model?.MovieDetails?.Genres?.Count(); ++i)
+                            {
+                                <input type="hidden" asp-for="@Model.MovieDetails.Genres[i].Name" />
+                                <a asp-for="@Model.MovieDetails.Genres[i].Name" href="#">@Model.MovieDetails.Genres[i].Name</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.ProductionCountries" class="control-label"></label>
+                        <div class="item-content-block tags">
+                            @for (var i = 0; i < Model.MovieDetails?.ProductionCountries?.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.MovieDetails.ProductionCountries[i].Name" />
+                                <input type="hidden" asp-for="@Model.MovieDetails.ProductionCountries[i].Code" />
+                                <a asp-for="@Model.MovieDetails.ProductionCountries[i].Code" href="#">@Model.MovieDetails.ProductionCountries[i].Code - @Model.MovieDetails.ProductionCountries[i].Name</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.SpokenLanguages" class="control-label"></label>
+                        <div class="item-content-block tags">
+                            @for (var i = 0; i < Model.MovieDetails?.SpokenLanguages?.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.MovieDetails.SpokenLanguages[i].Name" />
+                                <input type="hidden" asp-for="@Model.MovieDetails.SpokenLanguages[i].Code" />
+                                <a href="#">@Model.MovieDetails.SpokenLanguages[i].Code - @Model.MovieDetails.SpokenLanguages[i].Name</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label asp-for="MovieDetails.ProductionCompanies" class="control-label"></label>
+                        <div class="item-content-block tags">
+                            @for (var i = 0; i < Model.MovieDetails?.ProductionCompanies?.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.MovieDetails.ProductionCompanies[i].Name" />
+                                <input type="hidden" asp-for="@Model.MovieDetails.ProductionCompanies[i].OriginCountry" />
+                                <a href="#">@Model.MovieDetails.ProductionCompanies[i].Name - @Model.MovieDetails.ProductionCompanies[i].OriginCountry</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-8"><h2><b>Movie Casts</b></h2></div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add Cast</button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Charecter</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < Model.CastDetails?.Count(); ++i)
+                                {
+                                <tr>
+                                    <input type="hidden" asp-for="@Model.CastDetails[i].Name" />
+                                    <input type="hidden" asp-for="@Model.CastDetails[i].Character" />
+                                    <input type="hidden" asp-for="@Model.CastDetails[i].TheMovideDBPersonId" />
+
+                                    <td>@Model.CastDetails[i].Name</td>
+                                    <td>@Model.CastDetails[i].Character</td>
+                                    <td>
+                                        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-8"><h2><b>Movie Crews</b></h2></div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add Crew</button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < Model.CrewDetails?.Count(); ++i)
+                                {
+                                <tr>
+                                    <input type="hidden" asp-for="@Model.CrewDetails[i].Name" />
+                                    <input type="hidden" asp-for="@Model.CrewDetails[i].Department" />
+                                    <input type="hidden" asp-for="@Model.CrewDetails[i].Job" />
+                                    <input type="hidden" asp-for="@Model.CrewDetails[i].TheMovideDBPersonId" />
+
+                                    <td>@Model.CrewDetails[i].Name</td>
+                                    <td>@Model.CrewDetails[i].Department (@Model.CrewDetails[i].Job) </td>
+                                    <td>
+                                        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                                    </td>
+                                </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="@Model.MovieDetails.TheMovieDBId" />
+
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        var actions = $("table td:last-child").html();
+        // Append table with add row form on add new button click
+        $(".add-new").click(function () {
+            $(this).attr("disabled", "disabled");
+            var index = $("table tbody tr:last-child").index();
+            var row = '<tr>' +
+                '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+                '<td><input type="text" class="form-control" name="department" id="department"></td>' +
+                '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+                '<td>' + actions + '</td>' +
+                '</tr>';
+            $("table").append(row);
+            $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        // Add row on add button click
+        $(document).on("click", ".add", function () {
+            var empty = false;
+            var input = $(this).parents("tr").find('input[type="text"]');
+            input.each(function () {
+                if (!$(this).val()) {
+                    $(this).addClass("error");
+                    empty = true;
+                } else {
+                    $(this).removeClass("error");
+                }
+            });
+            $(this).parents("tr").find(".error").first().focus();
+            if (!empty) {
+                input.each(function () {
+                    $(this).parent("td").html($(this).val());
+                });
+                $(this).parents("tr").find(".add, .edit").toggle();
+                $(".add-new").removeAttr("disabled");
+            }
+        });
+        // Edit row on edit button click
+        $(document).on("click", ".edit", function () {
+            $(this).parents("tr").find("td:not(:last-child)").each(function () {
+                $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+            });
+            $(this).parents("tr").find(".add, .edit").toggle();
+            $(".add-new").attr("disabled", "disabled");
+        });
+        // Delete row on delete button click
+        $(document).on("click", ".delete", function () {
+            $(this).parents("tr").remove();
+            $(".add-new").removeAttr("disabled");
+        });
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
