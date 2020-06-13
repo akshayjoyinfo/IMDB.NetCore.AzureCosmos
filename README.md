@@ -135,20 +135,29 @@ This is sample IMDB Movie Application which try to load the date from  theMovide
         [JsonProperty("language_name")]
         public string Name { get; set; }
     }
+    
     ```
-  [CosmosCollection(Container ="Movies")]
+    
+  CosmosCollection(Container ="Movies")
     public class Movie  
+    
     using This all movies will be write into Collection Movies in given Cosmos Database, similar to Table()
+    
     
 3. check CosmosService<T> for the implemenation for interface
 
+
 4. Register ICosmosService<T> with CosmosService<T>
-      ```
+
+```
       services.AddTransient(typeof(ICosmosService<>), typeof(CosmosService<>));
-      ```
+
+```
+
 5. Use the Model in Service/Controller like ths
 
-  ```
+
+```
        private readonly ICosmosService<Movie> _movieCosmosHandler;
        private readonly ICosmosService<ProductionCompany> _productionCompanyCosmosHandler;
        private readonly ICosmosService<Genre> _genreCosmosHandler;
@@ -169,7 +178,8 @@ This is sample IMDB Movie Application which try to load the date from  theMovide
         var result = await _genreCosmosHandler.AddAsync(genre);
         
 
-  ```
+
+```
 
 
 
